@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">  
+	<title>demo1</title>
+	<link rel="stylesheet" href="./css/common.css">
+</head>
+<body>
+<div id="chart1" style="width:600px; height: 400px;"></div>
+<!-- js部分 -->
+<script src="./js/jquery.min.js"></script>
+<script src="./js/echarts.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	 var option = {
+        title:{
+            text:'ECharts 标题'
+        },
+        legend:{
+            data:['用户来源']
+        },
+        xAxis:{
+            data:["Android","IOS","PC","Ohter"]
+        },
+        yAxis:{
+        },
+        series:[{
+            name:'访问量',
+            type:'line',
+            data:[500,200,360,100]
+        }]
+    };
+    //初始化echarts实例
+    var myChart = echarts.init(document.getElementById('chart1'));
+    myChart.setOption(option);
+})
+</script>
+</body>
+</html>

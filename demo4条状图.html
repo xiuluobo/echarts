@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">  
+	<title>demo4</title>
+	<link rel="stylesheet" href="./css/common.css">
+</head>
+<body>
+<div id="bar"  style="width:400px;height:300px;" ></div>
+<!-- js部分 -->
+<script src="./js/jquery.min.js"></script>
+<script src="./js/echarts.min.js"></script>
+<script type="text/javascript">
+	var	option = {
+		backgroundColor: '#001848',//背景色
+		grid:{x:25,y:15,x2:15,y2:40},//图像距离四周的距离，常用
+	    xAxis: {
+	        type : 'category',
+	        axisLabel: {
+	        	color:'#fff',
+	        },
+	        axisTick: {
+	            show: false
+	        },
+	        axisLine: {
+	            show: false
+	        },
+	    },
+	    yAxis: {
+	        axisLine: {
+	            show: false
+	        },
+	        axisTick: {
+	            show: false
+	        },
+	        axisLabel: {
+	            show:false
+	        },
+	        splitLine: {
+	            show: false
+	        }
+	    },
+	    series: [
+	        {
+	            type: 'bar',
+	            barWidth:6,
+	            label: {
+	                normal: {
+	                    show: true,
+	                    position: 'top',
+	                    color:'#fff'
+	                }
+	            },
+	            itemStyle: {
+	                normal: {
+	                	barBorderRadius:11,
+	                    color:'#09b0f5',
+	                },
+	                emphasis: {
+	                    color: new echarts.graphic.LinearGradient(
+	                        0, 0, 0, 1,
+	                        [
+	                            {offset: 0, color: '#2378f7'},
+	                            {offset: 0.7, color: '#2378f7'},
+	                            {offset: 1, color: '#83bff6'}
+	                        ]
+	                    )
+	                }
+	            },
+	            // data: data
+	        }
+	    ]
+	};
+	var myChartBar = echarts.init(document.getElementById('bar'));
+	var x_date = ['02','03','04','05','06','07','08','09','10','11','12','01','(月)'];
+	var bar_data = [220, 182, 191, 234, 290, 330, 310, 123, 442, 321, 90, 149];
+	makeBar();
+    function makeBar(){
+        option.series[0].data = bar_data;
+        option.xAxis.data = x_date;
+        myChartBar.setOption(option);
+    }
+</script>
+</body>
+</html>

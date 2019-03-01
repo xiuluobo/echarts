@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">  
+	<title>demo7条状图</title>
+	<link rel="stylesheet" href="./css/common.css">
+</head>
+<body>
+<div id="barCity"  style="width:500px;height:300px;" ></div>
+<!-- js部分 -->
+<script src="./js/jquery.min.js"></script>
+<script src="./js/echarts.min.js"></script>
+<script type="text/javascript">
+    var myChartBarCity = echarts.init(document.getElementById('barCity'));
+    var barCityDate=["石家庄","保定","张家口","承德","秦皇岛","唐山","廊坊","沧州","邯郸","衡水","邢台"];
+    var barCityData = [220, 182, 191, 234, 290, 330, 310, 123, 442, 321, 90];
+    var  option = {
+        grid:{x:35,y:20,x2:25,y2:25},
+        backgroundColor: '#001848',
+        xAxis: {
+            type : 'category',
+            axisLabel: {
+                color:'#fff',
+            },
+            axisTick: {
+                show: false
+            },
+            axisLine: {
+                lineStyle:{
+                    color:'#083162',
+                    width:'2'
+                }
+            },
+        },
+        yAxis: {
+            axisLine: {
+                show: false
+            },
+            axisTick: {
+                show: false
+            },
+            axisLabel: {
+                show:false
+            },
+            splitLine: {
+                show: false       
+            }
+        },
+        series: [
+            {
+                type: 'bar',
+                barWidth:13,
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top',
+                        color:'#099bdb',
+                        fontSize:13,
+                        fontWeight:'bold',
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(
+                            0, 0, 0, 1,
+                            [
+                                {offset: 0, color: '#09b0f5'},
+                                {offset: 1, color: '#0c66ad'},
+                            ]
+                        )
+                    },
+                    emphasis: {
+                        color: new echarts.graphic.LinearGradient(
+                            0, 0, 0, 1,
+                            [
+                                {offset: 0, color: '#2378f7'},
+                                {offset: 0.7, color: '#2378f7'},
+                                {offset: 1, color: '#83bff6'}
+                            ]
+                        )
+                    }
+                },
+                // data: data
+            }
+        ]
+    };
+    makeBarCity();
+    function makeBarCity(){
+        option.series[0].data = barCityData;
+        option.xAxis.data = barCityDate;
+        myChartBarCity.setOption(option);
+    }
+</script>
+</body>
+</html>

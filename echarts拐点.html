@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>echarts</title>
+<script src="../js/adapt.js"></script>
+<link rel="stylesheet" href="../css/common.css">
+</head>
+<style>
+#container{
+    height:20rem;
+    width:100%;
+}
+</style>
+<body>
+<div id="container"></div>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/echarts.min.js"></script>
+<script>
+    var data1 = [61,60,49,68,88,77,72];
+    var data2 = [161,160,149,168,102,177,172];
+    var option = {
+        grid: {       //直角坐标系内绘图网格
+            left: '3%',
+            right: '5%',
+            top:'15%',
+            containLabel: true
+        },
+        legend: {
+            data:['第一条','第二条'] //必须在下面series有对应的name
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            splitLine:{
+        　　　　show:true
+        　　},
+            axisLine:{
+                lineStyle: {
+                    color:'#808080',
+                },
+            },
+            axisLabel: {
+                textStyle: {
+                    color: '#808080',//坐标值得具体的颜色
+                }
+            },
+            data: ['09-13', '09-14', '09-15', '09-16', '09-17', '09-18', '09-19']
+        },
+        yAxis: {
+            type: 'value',
+            splitLine:{
+        　　　　show:true
+        　　},
+            axisLine:{
+                lineStyle: {
+                    color:'#808080',
+                },
+            },
+            axisLabel: {
+                textStyle: {
+                    color: '#808080',//坐标值得具体的颜色
+                }
+            }
+        },
+        series: [
+            {
+                name:"第一条",
+                type:'line',
+                showAllSymbol:true,
+                symbolSize: 8,
+                symbol: 'emptyCircle',
+                itemStyle : {
+                    normal : {
+                        label: {  //折线图顶部显示文字
+                            show: true,
+                            position: 'top',
+                            fontSize:11,
+                            formatter:function (param) { //拐点文字回调   
+                                console.log(param);         
+                                var current_data = param.value;          
+                                if(param.value >170){                
+                                    return param.value +'偏高';            
+                                }else if(param.value <150){                
+                                    return param.value +'偏低';            
+                                }        
+                                return param.value;
+                            },
+                        },
+                        color:function(param){ //拐点颜色
+                            if(param.value>170){
+                                return '#ff0000'
+                            }else if(param.value<150){
+                                return 'orange'
+                            }else{
+                                return '#01abff'
+                            }
+                        },
+                        lineStyle:{
+                            color:'#01abff'
+                        },
+                        areaStyle: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 0.6,
+                                [
+                                    {offset: 0, color: '#01abff'},
+                                    {offset: 1, color: '#fff'},
+                                ]
+                            )
+                        }
+                    }
+                },
+                data:data2,
+            },
+            {
+                name:"第二条",
+                type:'line',
+                showAllSymbol:true,
+                symbolSize: 8,
+                symbol: 'emptyCircle',
+                itemStyle : {
+                    color:'#5cca6f',
+                    normal : {
+                        label: {  //折线图顶部显示文字
+                            show: true,
+                            position: 'bottom',
+                            fontSize:11,
+                        },
+                        color:'#5cca6f',
+                        borderColor:"#5cca6f",
+                        lineStyle:{
+                            color:'#5cca6f'
+                        },
+                        areaStyle: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 0.6,
+                                [
+                                    {offset: 0, color: '#5cca6f'},
+                                    {offset: 1, color: '#fff'},
+                                ]
+                            )
+                        }
+                    }
+                },
+                data:data1,
+            },
+        ]
+    };
+    var myChart = echarts.init(document.getElementById("container"));
+    myChart.setOption(option, true);
+</script>
+</body>
+</html>
